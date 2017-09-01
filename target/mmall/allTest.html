@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>测试接口</title>
+    <script src="../static/js/jquery.js"></script>
+</head>
+<body>
+<form id="form1" name="form1" method="post" action="">
+    <table width="500" border="0">
+        <tr>
+            <td><label>接口地址：
+                <input type="text" name="textfield2" id="url"/>
+            </label></td>
+            <td>
+                <select id="type" class="form-control">
+                    <option value="post">post</option>
+                    <option value="get">get</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label>参数名
+                <input type="text" name="textfield" id="para1"/>
+            </label></td>
+            <td><label>值
+                <input type="text" name="textfield3" id="value1"/>
+            </label></td>
+        </tr>
+        <tr>
+            <td><label>参数名
+                <input type="text" name="textfield8" id="para2"/>
+            </label></td>
+            <td><label>值
+                <input type="text" name="textfield4" id="value2"/>
+            </label></td>
+        </tr>
+        <tr>
+            <td><label>参数名
+                <input type="text" name="textfield9" id="para3"/>
+            </label></td>
+            <td><label></label>
+                <label>值
+                    <input type="text" name="textfield5" id="value3"/>
+                </label></td>
+        </tr>
+        <tr>
+            <td><label>参数名
+                <input type="text" name="textfield10" id="para4"/>
+            </label></td>
+            <td><label>值
+                <input type="text" name="textfield6" id="value4"/>
+            </label></td>
+        </tr>
+        <tr>
+            <td><label>参数名
+                <input type="text" name="textfield11" id="para5"/>
+            </label></td>
+            <td><label>值
+                <input type="text" name="textfield7" id="value5"/>
+            </label></td>
+        </tr>
+        <tr>
+            <td><label>参数名
+                <input type="text" name="textfield11" id="para6"/>
+            </label></td>
+            <td><label>值
+                <input type="text" name="textfield7" id="value6"/>
+            </label></td>
+        </tr>
+        <tr>
+            <td><label>参数名
+                <input type="text" name="textfield11" id="para7"/>
+            </label></td>
+            <td><label>值
+                <input type="text" name="textfield7" id="value7"/>
+            </label></td>
+        </tr>
+        <tr>
+            <td><label>参数名
+                <input type="text" name="textfield11" id="para8"/>
+            </label></td>
+            <td><label>值
+                <input type="text" name="textfield7" id="value8"/>
+            </label></td>
+        </tr>
+    </table>
+    <input type="button" id="submit" value="提交" onclick="send()">
+    <input type="button" value="清空" onclick="empty()"/>
+</form>
+<textarea id="message" style="width: 350px;height: 500px"></textarea>
+</body>
+
+<script>
+    function empty() {
+        for(var i=0;i<8;i++){
+            var paran="#para"+(i+1);
+            var valuen="#value"+(i+1);
+            $(paran).val("");
+            $(valuen).val("");
+        }
+    }
+    function send() {
+
+        var method = $("#type").val();
+        var url  = $("#url").val();
+        var data1="";
+        for(var i=0;i<8;i++){
+            var paran="#para"+(i+1);
+            var valuen="#value"+(i+1);
+            var val1=$(paran).val();
+            var val2=$(valuen).val();
+            if(val1!=""){
+                data1+=val1+"="+val2+"&"
+            }
+        }
+        data1=data1.substr(0,data1.length-1);
+        alert(data1);
+        $.ajax({
+            type : method,
+            url : url,
+            data : data1,
+            success: function(data) {
+               $("#message").html(JSON.stringify(data));
+            }
+        });
+    }
+</script>
+</html>
