@@ -7,7 +7,6 @@ import com.mmall.dao.UserMapper;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
 import com.mmall.util.MD5Util;
-import jdk.nashorn.internal.ir.IfNode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +45,7 @@ import java.util.UUID;
  *                奔驰宝马贵者趣，公交自行程序员。
  *                别人笑我忒疯癫，我笑自己命太贱；
  *                不见满街漂亮妹，哪个归得程序员？
+ *
  *          author ：  linzhou
  *          Date :     17/08/31
  */
@@ -261,4 +261,13 @@ public class UserServiceImpl implements IUserService {
     }
 
 
+
+    public ServerResponse<User> get_information(int userId) {
+        User user = mUserMapper.selectByPrimaryKey(userId);
+        if (user==null){
+            return ServerResponse.createByErrorMessage("找不到当前用户");
+        }
+        user.setPassword(StringUtils.EMPTY);
+        return ServerResponse.createBySuccess(user);
+    }
 }

@@ -1,6 +1,7 @@
 package com.mmall.controller.portal;
 
 import com.mmall.common.Const;
+import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
@@ -46,6 +47,7 @@ import javax.servlet.http.HttpSession;
  *                奔驰宝马贵者趣，公交自行程序员。
  *                别人笑我忒疯癫，我笑自己命太贱；
  *                不见满街漂亮妹，哪个归得程序员？
+ *
  *          author ：  linzhou
  *          Date :     17/08/31
  */
@@ -58,7 +60,7 @@ public class UserController {
 
 
     /**
-     * 登录
+     * 用户登录
      *
      * @param username 账号
      * @param password 密码
@@ -76,7 +78,6 @@ public class UserController {
     }
 
 
-
     /**
      * 登出
      *
@@ -89,7 +90,6 @@ public class UserController {
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccess();
     }
-
 
 
     /**
@@ -105,7 +105,6 @@ public class UserController {
     }
 
 
-
     /**
      * 判断账号和邮箱是否存着的验证的验证
      *
@@ -118,6 +117,7 @@ public class UserController {
     public ServerResponse<String> checkValid(String str,String type){
         return mIUserService.checkValid(str,type);
     }
+
 
     /**
      *获取用户信息
@@ -163,12 +163,13 @@ public class UserController {
         return mIUserService.checkAnswer(username,question,answer);
     }
 
+
     /**
      * 忘记密码下的修改用户密码
      *
      * @param username     用户名
      * @param newPassword  新密码
-     * @param forgetoTken  系统标识
+     * @param forgetoTken  系统标识(用户辨别用户是否有更改密码的权限)
      * @return
      */
     @RequestMapping(value = "forget_reset_password.do",method = RequestMethod.POST)
@@ -176,6 +177,7 @@ public class UserController {
     public ServerResponse<String> forgetRestPassword(String username,String newPassword,String forgetoTken){
         return mIUserService.forgetRestPassword(username,newPassword,forgetoTken);
     }
+
 
     /**
      * 登录状态下的修改密码
@@ -194,6 +196,7 @@ public class UserController {
         }
         return mIUserService.resetPassword(oldPassword,newPassword,user);
     }
+
 
     /**
      * 修改个人信息
@@ -219,4 +222,20 @@ public class UserController {
         return response;
     }
 
+
+    /**
+     * 获取用户详情
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "get_information.do",method = RequestMethod.POST)
+    @ResponseBody//让返回自动转化成json格式
+    public ServerResponse<User> get_information(HttpSession session){
+        User sessionUser = (User) session.getAttribute(Const.CURRENT_USER);
+        if (sessionUser==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录，需要强制登陆");
+        }
+        return mIUserService.get_information(sessionUser.getId());
+    }
 }
