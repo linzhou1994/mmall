@@ -58,4 +58,6 @@ public interface IUserService {
 
     ServerResponse<User> get_information(int userId);
 
+    ServerResponse checkAdminRole(User user);
+
 }

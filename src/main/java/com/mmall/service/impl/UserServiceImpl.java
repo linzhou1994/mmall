@@ -64,7 +64,7 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     @Override
-    public ServerResponse<User> login(String username, String password) {
+    public ServerResponse<User> login( String username, String password) {
         int resultCount = mUserMapper.chekUsername(username);
         if (resultCount == 0){
             return ServerResponse.createByErrorMessage("用户名不存在");
@@ -261,7 +261,11 @@ public class UserServiceImpl implements IUserService {
     }
 
 
-
+    /**
+     * 获取用户信息
+     * @param userId 用户id
+     * @return
+     */
     public ServerResponse<User> get_information(int userId) {
         User user = mUserMapper.selectByPrimaryKey(userId);
         if (user==null){
@@ -270,4 +274,21 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess(user);
     }
+
+
+    /**
+     * 校验是否是管理员
+     * @param user
+     * @return
+     */
+    public ServerResponse checkAdminRole(User user){
+        if (user!=null&&user.getRole().intValue()==Const.Role.ROLE_ADMIN){
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
+    }
+
+
+
+
 }

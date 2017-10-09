@@ -8,10 +8,7 @@ import com.mmall.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -238,4 +235,13 @@ public class UserController {
         }
         return mIUserService.get_information(sessionUser.getId());
     }
+//
+//    @RequestMapping(value = "string.do")
+//    @ResponseBody//让返回自动转化成json格式
+//    public String string(@RequestParam(value = "name", required=false) String str){
+//
+//        return "str:"+str;
+//    }
+//
+
 }
