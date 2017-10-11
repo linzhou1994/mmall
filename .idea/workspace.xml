@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e13eca23-a023-41f1-8fc7-769be528af7c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmall/controller/backend/CategorManageController.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/controller/backend/CategorManageController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmall/controller/backend/ProductManageController.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/controller/backend/ProductManageController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmall/service/IProductService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/service/IProductService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmall/service/impl/CategoryServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/service/impl/CategoryServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmall/service/impl/ProductServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/service/impl/ProductServiceImpl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -1251,7 +1246,7 @@
       <workItem from="1506733924094" duration="1509000" />
       <workItem from="1507510939301" duration="17269000" />
       <workItem from="1507603959444" duration="3878000" />
-      <workItem from="1507692597711" duration="953000" />
+      <workItem from="1507692597711" duration="995000" />
     </task>
     <task id="LOCAL-00001" summary="新增商品类型模块">
       <created>1507532424374</created>
@@ -1267,11 +1262,18 @@
       <option name="project" value="LOCAL" />
       <updated>1507532435820</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="新增商品类型模块">
+      <created>1507698849132</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1507698849132</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88525000" />
+    <option name="totallyTimeSpent" value="88567000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -1610,6 +1612,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1530">
           <caret line="102" column="39" lean-forward="false" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
