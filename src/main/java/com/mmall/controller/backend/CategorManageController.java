@@ -66,6 +66,7 @@ public class CategorManageController {
 
     /**
      * 添加分类
+     *
      * @param session
      * @param categoryName 分类名称
      * @param parentId 父节点id
@@ -90,6 +91,7 @@ public class CategorManageController {
 
     /**
      * 更新品类名称
+     *
      * @param session
      * @param categoryName 品类名称
      * @param categoryId   品类id
@@ -113,6 +115,7 @@ public class CategorManageController {
 
     /**
      * 获取下一个子节点的所有平级节点信息（不递归）
+     *
      * @param session
      * @param categoryId 品类id
      * @return
@@ -135,6 +138,7 @@ public class CategorManageController {
 
     /**
      * 递归查询本节点的id和子节点的id
+     *
      * @param categoryId 当前节点的id
      * @return
      */

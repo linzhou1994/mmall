@@ -64,6 +64,14 @@ public class CategoryServiceImpl implements ICategoryService{
     @Autowired
     private CategoryMapper mCategoryMapper;
 
+
+    /**
+     * 添加分类
+
+     * @param categoryName 分类名称
+     * @param parentId 父节点id
+     * @return
+     */
     public ServerResponse addCategory(String categoryName,Integer parentId){
         if (parentId==null|| StringUtils.isBlank(categoryName)){
             return ServerResponse.createByErrorMessage("添加品类参数错误");
@@ -80,6 +88,13 @@ public class CategoryServiceImpl implements ICategoryService{
         return ServerResponse.createByErrorMessage("添加品类失败");
     }
 
+
+    /**
+     * 更新品类名称
+     * @param categoryName 品类名称
+     * @param categoryId   品类id
+     * @return
+     */
     public ServerResponse updateCategoryName(String categoryName,Integer categoryId){
         if (categoryId==null|| StringUtils.isBlank(categoryName)){
             return ServerResponse.createByErrorMessage("更新品类参数错误");
@@ -96,6 +111,11 @@ public class CategoryServiceImpl implements ICategoryService{
         return ServerResponse.createByErrorMessage("更新品类名称失败");
     }
 
+    /**
+     * 获取下一个子节点的所有平级节点信息（不递归）
+     * @param categoryId 品类id
+     * @return
+     */
     public ServerResponse<List<Category>> getChildrenParallelCategory(Integer categoryId ){
         List<Category> categoryList = mCategoryMapper.selectCategoryChildrenByParentId(categoryId);
         if (CollectionUtils.isEmpty(categoryList)){
@@ -122,6 +142,12 @@ public class CategoryServiceImpl implements ICategoryService{
         return  ServerResponse.createBySuccess(categoryList);
     }
 
+    /**
+     * 递归查询本节点的id和子节点的id
+     *
+     * @param categoryId 当前节点的id
+     * @return
+     */
     private void findChildrenCategory(Set<Category> categorySet,Integer categoryId ){
         Category category= mCategoryMapper.selectByPrimaryKey(categoryId);
         if (category!=null){
