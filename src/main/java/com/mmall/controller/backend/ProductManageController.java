@@ -1,18 +1,26 @@
 package com.mmall.controller.backend;
 
+import com.google.common.collect.Maps;
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Product;
 import com.mmall.pojo.User;
+import com.mmall.service.IFileService;
 import com.mmall.service.IProductService;
 import com.mmall.service.IUserService;
+import com.mmall.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import sun.dc.pr.PRError;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -62,6 +70,9 @@ public class ProductManageController {
     @Autowired
     private IProductService mIProductService;
 
+    @Autowired
+    private IFileService mFileServiceImpl;
+
     /**
      * 新增商品
      *
@@ -77,7 +88,7 @@ public class ProductManageController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登陆");
         }
         if (mIUserService.checkAdminRole(user).isSuccess()) {
-
+            //是管理员，执行业务
             return mIProductService.saveOrUpdateProduct(product);
         }
         return ServerResponse.createByErrorMessage("没有操作权限");
@@ -99,7 +110,7 @@ public class ProductManageController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登陆");
         }
         if (mIUserService.checkAdminRole(user).isSuccess()) {
-
+            //是管理员，执行业务
             return mIProductService.setSaleStatus(productId, status);
         }
         return ServerResponse.createByErrorMessage("没有操作权限");
@@ -108,6 +119,7 @@ public class ProductManageController {
 
     /**
      * 获取商品详情
+     *
      * @param session
      * @param productId 商品id
      * @return
@@ -120,12 +132,89 @@ public class ProductManageController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登陆");
         }
         if (mIUserService.checkAdminRole(user).isSuccess()) {
-
+            //是管理员，执行业务
             return mIProductService.manageProductDetail(productId);
-
         }
         return ServerResponse.createByErrorMessage("没有操作权限");
     }
 
+
+    /**
+     * 商品列表（带分页）
+     *
+     * @param session
+     * @param pageNum 当前页码，默认第一页
+     * @param pageSize 每页所含商品数量，默认每页10个
+     * @return
+     */
+    @RequestMapping("list.do")
+    @ResponseBody
+    public ServerResponse getList(HttpSession session
+            , @RequestParam(value = "pageNum",defaultValue = "1") int pageNum
+            ,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登陆");
+        }
+        if (mIUserService.checkAdminRole(user).isSuccess()) {
+            //是管理员，执行业务
+            return mIProductService.getProductList(pageNum,pageSize);
+        }
+        return ServerResponse.createByErrorMessage("没有操作权限");
+    }
+
+    /**
+     * 商品搜索列表（带分页）
+     *
+     * @param session
+     * @param productName 商品名称（可空）
+     * @param productId   商品id（可空）
+     * @param pageNum     当前页码，默认第一页
+     * @param pageSize    每页所含商品数量，默认每页10个
+     * @return
+     */
+    @RequestMapping("search.do")
+    @ResponseBody
+    public ServerResponse productSearch(HttpSession session,String productName,Integer productId
+            ,@RequestParam(value = "pageNum",defaultValue = "1") int pageNum
+            ,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登陆");
+        }
+        if (mIUserService.checkAdminRole(user).isSuccess()) {
+            //是管理员，执行业务
+            return mIProductService.searchProduct(productName,productId,pageNum,pageSize);
+        }
+        return ServerResponse.createByErrorMessage("没有操作权限");
+    }
+
+    /**
+     * 上传文件
+     * @param file    文件
+     * @param request
+     * @return
+     */
+    @RequestMapping("upload.do")
+    @ResponseBody
+    public ServerResponse upload(HttpSession session,@RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登陆");
+        }
+        if (mIUserService.checkAdminRole(user).isSuccess()) {
+            //是管理员，执行业务
+            String path = request.getSession().getServletContext().getRealPath("upload");
+            String targetFilename = mFileServiceImpl.upload(file,path);
+            //String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFilename;
+            String url = "";//PropertiesUtil.getProperty("url")+targetFilename;
+            Map fileMap = Maps.newHashMap();
+            fileMap.put("uri",targetFilename);
+            fileMap.put("url",url);
+
+            return ServerResponse.createBySuccess(fileMap);
+        }
+        return ServerResponse.createByErrorMessage("没有操作权限");
+    }
 
 }

@@ -1,9 +1,6 @@
-package com.mmall.service;
+package com.mmall.vo;
 
-import com.github.pagehelper.PageInfo;
-import com.mmall.common.ServerResponse;
-import com.mmall.pojo.Product;
-import com.mmall.vo.ProductDetailVo;
+import java.math.BigDecimal;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -38,20 +35,90 @@ import com.mmall.vo.ProductDetailVo;
  * 不见满街漂亮妹，哪个归得程序员？
  * ---------------------------
  * 项目名： mmall
- * 包名：   com.mmall.service
+ * 包名：   com.mmall.vo
  * 创建者:  linzhou
- * 创建时间:17/10/09
+ * 创建时间:17/10/11
  * 描述:
  */
-public interface IProductService {
+public class ProductListVo {
 
-    ServerResponse saveOrUpdateProduct(Product product);
+    private Integer id;
 
-    ServerResponse setSaleStatus(Integer productId, Integer status);
+    private Integer categoryId;
 
-    ServerResponse<ProductDetailVo> manageProductDetail(Integer productId);
+    private String name;
 
-    ServerResponse<PageInfo> getProductList(int pageNum, int pageSize);
+    private String subtitle;
 
-    ServerResponse<PageInfo> searchProduct(String productName,Integer productId,int pageNum,int pageSize);
+    private String mainImage;
+
+    private BigDecimal price;
+
+    private Integer status;
+
+    private String imageHost;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getImageHost() {
+        return imageHost;
+    }
+
+    public void setImageHost(String imageHost) {
+        this.imageHost = imageHost;
+    }
 }

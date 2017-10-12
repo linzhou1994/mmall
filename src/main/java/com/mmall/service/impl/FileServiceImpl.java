@@ -1,9 +1,16 @@
-package com.mmall.service;
+package com.mmall.service.impl;
 
-import com.github.pagehelper.PageInfo;
-import com.mmall.common.ServerResponse;
-import com.mmall.pojo.Product;
-import com.mmall.vo.ProductDetailVo;
+import com.google.common.collect.Lists;
+import com.mmall.service.IFileService;
+import com.mmall.util.FTPUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -38,20 +45,45 @@ import com.mmall.vo.ProductDetailVo;
  * 不见满街漂亮妹，哪个归得程序员？
  * ---------------------------
  * 项目名： mmall
- * 包名：   com.mmall.service
+ * 包名：   com.mmall.service.impl
  * 创建者:  linzhou
- * 创建时间:17/10/09
+ * 创建时间:17/10/12
  * 描述:
  */
-public interface IProductService {
 
-    ServerResponse saveOrUpdateProduct(Product product);
+@Service("mFileServiceImpl")
+public class FileServiceImpl implements IFileService {
 
-    ServerResponse setSaleStatus(Integer productId, Integer status);
+    private Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 
-    ServerResponse<ProductDetailVo> manageProductDetail(Integer productId);
+    public String upload(MultipartFile file,String path){
+        String fileName = file.getOriginalFilename();
+        //获取扩展名
+        String fileExtensionName = fileName.substring(fileName.lastIndexOf(".")+1);
+        String uploadFileName = UUID.randomUUID().toString()+"."+fileExtensionName;
 
-    ServerResponse<PageInfo> getProductList(int pageNum, int pageSize);
+        logger.info("开始上传文件，上传文件名称：{},上传路径：{},新文件的名：{}",fileName,path,uploadFileName);
 
-    ServerResponse<PageInfo> searchProduct(String productName,Integer productId,int pageNum,int pageSize);
+        File fileDir = new File(path);
+        if (!fileDir.exists()){
+            fileDir.setWritable(true);
+            fileDir.mkdirs();
+        }
+
+        File targetFile = new File(path,uploadFileName);
+        try {
+            file.transferTo(targetFile);
+            //---------文件已经上传成功
+
+            //FTPUtil.uploadFile(Lists.<File>newArrayList(targetFile));
+            //---------文件已经上传到ftp服务器上
+            //删除upload文件夹下的文件
+            //targetFile.delete();
+        } catch (IOException e) {
+
+            logger.error("上传文件异常",e);
+            return null;
+        }
+        return targetFile.getName();
+    }
 }

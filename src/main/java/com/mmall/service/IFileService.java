@@ -1,9 +1,6 @@
 package com.mmall.service;
 
-import com.github.pagehelper.PageInfo;
-import com.mmall.common.ServerResponse;
-import com.mmall.pojo.Product;
-import com.mmall.vo.ProductDetailVo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -40,18 +37,10 @@ import com.mmall.vo.ProductDetailVo;
  * 项目名： mmall
  * 包名：   com.mmall.service
  * 创建者:  linzhou
- * 创建时间:17/10/09
+ * 创建时间:17/10/12
  * 描述:
  */
-public interface IProductService {
+public interface IFileService {
 
-    ServerResponse saveOrUpdateProduct(Product product);
-
-    ServerResponse setSaleStatus(Integer productId, Integer status);
-
-    ServerResponse<ProductDetailVo> manageProductDetail(Integer productId);
-
-    ServerResponse<PageInfo> getProductList(int pageNum, int pageSize);
-
-    ServerResponse<PageInfo> searchProduct(String productName,Integer productId,int pageNum,int pageSize);
+    String upload(MultipartFile file, String path);
 }
