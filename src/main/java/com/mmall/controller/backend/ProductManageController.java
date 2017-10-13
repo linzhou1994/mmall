@@ -10,15 +10,15 @@ import com.mmall.service.IFileService;
 import com.mmall.service.IProductService;
 import com.mmall.service.IUserService;
 import com.mmall.util.PropertiesUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import sun.dc.pr.PRError;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -205,16 +205,72 @@ public class ProductManageController {
         if (mIUserService.checkAdminRole(user).isSuccess()) {
             //是管理员，执行业务
             String path = request.getSession().getServletContext().getRealPath("upload");
+
             String targetFilename = mFileServiceImpl.upload(file,path);
+
             //String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFilename;
-            String url = "";//PropertiesUtil.getProperty("url")+targetFilename;
+            String url = PropertiesUtil.getProperty("upload.url")+targetFilename;
             Map fileMap = Maps.newHashMap();
             fileMap.put("uri",targetFilename);
             fileMap.put("url",url);
-
             return ServerResponse.createBySuccess(fileMap);
         }
         return ServerResponse.createByErrorMessage("没有操作权限");
     }
+
+
+    /**
+     * 富文本图片上传
+     * @param file    文件
+     * @param request
+     * @return
+     */
+    @RequestMapping("richtext_img_upload.do")
+    @ResponseBody
+    public Map richtextImgUpload(
+            HttpSession session, @RequestParam(value = "upload_file",required = false) MultipartFile file
+            , HttpServletRequest request, HttpServletResponse response){
+
+        Map resultMap = Maps.newHashMap();
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+
+//        富文本中对于返回值有自己的要求,我们使用是simditor所以按照simditor的要求进行返回
+//        {
+//            "success": true/false,
+//                "msg": "error message", # optional
+//            "file_path": "[real file path]"
+//        }
+        if (user == null) {
+            resultMap.put("success",false);
+            resultMap.put("msg","请登陆管理员账号");
+            return resultMap;
+        }
+        if (mIUserService.checkAdminRole(user).isSuccess()) {
+            //是管理员，执行业务
+            String path = request.getSession().getServletContext().getRealPath("upload");
+
+            String targetFilename = mFileServiceImpl.upload(file,path);
+
+            if (StringUtils.isBlank(targetFilename)){
+                resultMap.put("success",false);
+                resultMap.put("msg","上传失败");
+                return resultMap;
+            }
+
+            String url = PropertiesUtil.getProperty("upload.url")+targetFilename;
+            resultMap.put("success",true);
+            resultMap.put("msg","上传成功");
+            resultMap.put("file_path",url);
+            response.addHeader("Access-Control-Allow-Headers","X-File-Name");
+            return resultMap;
+        }
+
+        resultMap.put("success",false);
+        resultMap.put("msg","当前用户，没有上传权限");
+        return resultMap;
+    }
+
+
+
 
 }

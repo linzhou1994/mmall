@@ -235,13 +235,5 @@ public class UserController {
         }
         return mIUserService.get_information(sessionUser.getId());
     }
-//
-//    @RequestMapping(value = "string.do")
-//    @ResponseBody//让返回自动转化成json格式
-//    public String string(@RequestParam(value = "name", required=false) String str){
-//
-//        return "str:"+str;
-//    }
-//
 
 }

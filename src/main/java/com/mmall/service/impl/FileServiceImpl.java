@@ -74,7 +74,6 @@ public class FileServiceImpl implements IFileService {
         try {
             file.transferTo(targetFile);
             //---------文件已经上传成功
-
             //FTPUtil.uploadFile(Lists.<File>newArrayList(targetFile));
             //---------文件已经上传到ftp服务器上
             //删除upload文件夹下的文件
