@@ -74,10 +74,10 @@ public class ProductManageController {
     private IFileService mFileServiceImpl;
 
     /**
-     * 新增商品
+     * 新增or修改商品
      *
      * @param session
-     * @param product 需要新增的商品
+     * @param product 需要新增的商品（如果有id则为修改，反之为新增）
      * @return
      */
     @RequestMapping("sava_product.do")

@@ -162,7 +162,7 @@
     where email = #{email}
   </select>
 
-    <select id="checkEmailByUserId" resultType="int" parameterType="string">
+    <select id="checkEmailByUserId" resultType="int" parameterType="map">
         select count(1) from mmall_user
         where email = #{email}
         AND id!=#{userid}
@@ -183,7 +183,7 @@
     where username = #{username}
   </select>
 
-    <select id="checkAnswer" resultType="string" parameterType="map">
+    <select id="checkAnswer" resultType="int" parameterType="map">
     SELECT count(1)
     from mmall_user
     where username = #{username}

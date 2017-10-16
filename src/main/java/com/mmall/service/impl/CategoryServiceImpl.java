@@ -129,7 +129,7 @@ public class CategoryServiceImpl implements ICategoryService{
      * @param categoryId 当前节点的id
      * @return
      */
-    public ServerResponse selectCategoryAndChildrenById(Integer categoryId ){
+    public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId ){
         Set<Category> categorySet = Sets.newHashSet();
         findChildrenCategory(categorySet,categoryId);
 
