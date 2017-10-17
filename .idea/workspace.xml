@@ -2,25 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e13eca23-a023-41f1-8fc7-769be528af7c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/controller/portal/CartController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/service/ICartService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/service/impl/CartServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/util/BigDecimalUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/vo/CartProductVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/vo/CartVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/test/java/BigDecimalTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mmall/common/Const.class" afterPath="$PROJECT_DIR$/target/classes/com/mmall/common/Const.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mmall/dao/CartMapper.class" afterPath="$PROJECT_DIR$/target/classes/com/mmall/dao/CartMapper.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mmall/dao/ProductMapper.class" afterPath="$PROJECT_DIR$/target/classes/com/mmall/dao/ProductMapper.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/mmall/WEB-INF/classes/com/mmall/common/Const.class" afterPath="$PROJECT_DIR$/target/mmall/WEB-INF/classes/com/mmall/common/Const.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/mmall/WEB-INF/classes/com/mmall/dao/ProductMapper.class" afterPath="$PROJECT_DIR$/target/mmall/WEB-INF/classes/com/mmall/dao/ProductMapper.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mmall.iml" afterPath="$PROJECT_DIR$/mmall.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmall/common/Const.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/common/Const.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmall/dao/CartMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/dao/CartMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmall/util/DateTimeUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmall/util/DateTimeUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/datasource.properties" afterPath="$PROJECT_DIR$/src/main/resources/datasource.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mappers/CartMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mappers/CartMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/datasource.properties" afterPath="$PROJECT_DIR$/target/classes/datasource.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mappers/CartMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mappers/CartMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mappers/ProductMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mappers/ProductMapper.xml" />
@@ -54,7 +41,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mmall/controller/portal/CartController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3528">
-              <caret line="204" column="4" lean-forward="false" selection-start-line="204" selection-start-column="4" selection-end-line="204" selection-end-column="4" />
+              <caret line="204" column="0" lean-forward="false" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1228,7 +1215,7 @@
       <workItem from="1507791420249" duration="7638000" />
       <workItem from="1507857095016" duration="13106000" />
       <workItem from="1508117480707" duration="13038000" />
-      <workItem from="1508202691948" duration="11466000" />
+      <workItem from="1508202691948" duration="11506000" />
     </task>
     <task id="LOCAL-00001" summary="新增商品类型模块">
       <created>1507532424374</created>
@@ -1279,7 +1266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508146502704</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="完成购物车模块功能">
+      <created>1508221227468</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1508221227468</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1294,7 +1288,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157442000" />
+    <option name="totallyTimeSpent" value="157482000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1353,7 +1347,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="新增商品类型模块" />
     <MESSAGE value="完成商品模块功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成商品模块功能" />
+    <MESSAGE value="完成购物车模块功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成购物车模块功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1820,7 +1815,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mmall/controller/portal/CartController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3528">
-          <caret line="204" column="4" lean-forward="false" selection-start-line="204" selection-start-column="4" selection-end-line="204" selection-end-column="4" />
+          <caret line="204" column="0" lean-forward="false" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
