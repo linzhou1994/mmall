@@ -1,11 +1,7 @@
-package com.mmall.util;
+package com.mmall.vo;
 
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
-import java.util.Date;
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -40,50 +36,46 @@ import java.util.Date;
  * 不见满街漂亮妹，哪个归得程序员？
  * ---------------------------
  * 项目名： mmall
- * 包名：   com.mmall.util
+ * 包名：   com.mmall.vo
  * 创建者:  linzhou
- * 创建时间:17/10/09
- * 描述:  时间格式转化工具类
+ * 创建时间:17/10/17
+ * 描述:
  */
-public class DateTimeUtil {
+public class CartVo {
+    private List<CartProductVo> cartProductVoList;
+    private BigDecimal cartTotalPrice;
+    private boolean allChecked;
+    private String imageHost;
 
-    public static final  String STANDARD_FORMAT="yyyy-MM-dd HH:mm:ss";
-
-    public static Date strToDate(String dateTimeStr ){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(STANDARD_FORMAT);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
-
+    public List<CartProductVo> getCartProductVoList() {
+        return cartProductVoList;
     }
 
-    public static Date strToDate(String dateTimeStr , String formatStr){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(formatStr);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
-
+    public void setCartProductVoList(List<CartProductVo> cartProductVoList) {
+        this.cartProductVoList = cartProductVoList;
     }
 
-    public static String dateToStr(Date date){
-        if (date==null){
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(STANDARD_FORMAT);
+    public BigDecimal getCartTotalPrice() {
+        return cartTotalPrice;
     }
 
-    public static String dateToStr(Date date , String formatStr){
-        if (date==null){
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(formatStr);
+    public void setCartTotalPrice(BigDecimal cartTotalPrice) {
+        this.cartTotalPrice = cartTotalPrice;
     }
 
+    public boolean isAllChecked() {
+        return allChecked;
+    }
 
-//    public static void main(String[] args) {
-//        System.out.println(DateTimeUtil.dateToStr(new Date()));
-//
-//        System.out.println(DateTimeUtil.strToDate("1994-10-29 23:29:09"));
-//
-//    }
+    public void setAllChecked(boolean allChecked) {
+        this.allChecked = allChecked;
+    }
+
+    public String getImageHost() {
+        return imageHost;
+    }
+
+    public void setImageHost(String imageHost) {
+        this.imageHost = imageHost;
+    }
 }

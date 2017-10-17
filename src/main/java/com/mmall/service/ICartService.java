@@ -1,11 +1,7 @@
-package com.mmall.util;
+package com.mmall.service;
 
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
-import java.util.Date;
+import com.mmall.common.ServerResponse;
+import com.mmall.vo.CartVo;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -40,50 +36,21 @@ import java.util.Date;
  * 不见满街漂亮妹，哪个归得程序员？
  * ---------------------------
  * 项目名： mmall
- * 包名：   com.mmall.util
+ * 包名：   com.mmall.service
  * 创建者:  linzhou
- * 创建时间:17/10/09
- * 描述:  时间格式转化工具类
+ * 创建时间:17/10/17
+ * 描述:
  */
-public class DateTimeUtil {
+public interface ICartService {
+    ServerResponse<CartVo> add(Integer userId, Integer productId, Integer count);
 
-    public static final  String STANDARD_FORMAT="yyyy-MM-dd HH:mm:ss";
+    ServerResponse<CartVo> update(Integer userId,Integer productId,Integer count);
 
-    public static Date strToDate(String dateTimeStr ){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(STANDARD_FORMAT);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
+    ServerResponse<CartVo> deleteProduct(Integer userId,String productIds);
 
-    }
+    ServerResponse<CartVo> list(Integer userId);
 
-    public static Date strToDate(String dateTimeStr , String formatStr){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(formatStr);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
+    ServerResponse<CartVo> selectOrUnSelect(Integer userId,Integer productId,Integer checked);
 
-    }
-
-    public static String dateToStr(Date date){
-        if (date==null){
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(STANDARD_FORMAT);
-    }
-
-    public static String dateToStr(Date date , String formatStr){
-        if (date==null){
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(formatStr);
-    }
-
-
-//    public static void main(String[] args) {
-//        System.out.println(DateTimeUtil.dateToStr(new Date()));
-//
-//        System.out.println(DateTimeUtil.strToDate("1994-10-29 23:29:09"));
-//
-//    }
+    ServerResponse<Integer> getCartProductCount(Integer userId);
 }

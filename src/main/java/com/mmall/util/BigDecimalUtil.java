@@ -1,11 +1,6 @@
 package com.mmall.util;
 
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
-import java.util.Date;
+import java.math.BigDecimal;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -42,48 +37,59 @@ import java.util.Date;
  * 项目名： mmall
  * 包名：   com.mmall.util
  * 创建者:  linzhou
- * 创建时间:17/10/09
- * 描述:  时间格式转化工具类
+ * 创建时间:17/10/17
+ * 描述:   BigDecimal工具类
  */
-public class DateTimeUtil {
-
-    public static final  String STANDARD_FORMAT="yyyy-MM-dd HH:mm:ss";
-
-    public static Date strToDate(String dateTimeStr ){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(STANDARD_FORMAT);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
+public class BigDecimalUtil {
+    private BigDecimalUtil(){
 
     }
 
-    public static Date strToDate(String dateTimeStr , String formatStr){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(formatStr);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
-
+    /**
+     * 两个double类型的加法运算
+     * @param v1
+     * @param v2
+     * @return
+     */
+    public static BigDecimal add(double v1,double v2){
+        BigDecimal b1 =new BigDecimal(Double.toString(v1));
+        BigDecimal b2 =new BigDecimal(Double.toString(v2));
+        return b1.add(b2);
     }
 
-    public static String dateToStr(Date date){
-        if (date==null){
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(STANDARD_FORMAT);
+    /**
+     * 两个double类型的减法运算
+     * @param v1 被减数
+     * @param v2 减数
+     * @return
+     */
+    public static BigDecimal sub(double v1,double v2){
+        BigDecimal b1 =new BigDecimal(Double.toString(v1));
+        BigDecimal b2 =new BigDecimal(Double.toString(v2));
+        return b1.subtract(b2);
     }
 
-    public static String dateToStr(Date date , String formatStr){
-        if (date==null){
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(formatStr);
+    /**
+     * 两个double类型的乘法运算
+     * @param v1  被乘数
+     * @param v2  乘数
+     * @return
+     */
+    public static BigDecimal mul(double v1,double v2){
+        BigDecimal b1 =new BigDecimal(Double.toString(v1));
+        BigDecimal b2 =new BigDecimal(Double.toString(v2));
+        return b1.multiply(b2);
     }
 
-
-//    public static void main(String[] args) {
-//        System.out.println(DateTimeUtil.dateToStr(new Date()));
-//
-//        System.out.println(DateTimeUtil.strToDate("1994-10-29 23:29:09"));
-//
-//    }
+    /**
+     * 两个double类型的除法运算（保留两位小数，四舍五入）
+     * @param v1 被除数
+     * @param v2 除数
+     * @return
+     */
+    public static BigDecimal div(double v1,double v2){
+        BigDecimal b1 =new BigDecimal(Double.toString(v1));
+        BigDecimal b2 =new BigDecimal(Double.toString(v2));
+        return b1.divide(b2,2,BigDecimal.ROUND_HALF_UP);
+    }
 }

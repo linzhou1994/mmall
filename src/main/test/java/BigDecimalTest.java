@@ -1,11 +1,6 @@
-package com.mmall.util;
+import org.junit.Test;
 
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
-import java.util.Date;
+import java.math.BigDecimal;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -40,50 +35,32 @@ import java.util.Date;
  * 不见满街漂亮妹，哪个归得程序员？
  * ---------------------------
  * 项目名： mmall
- * 包名：   com.mmall.util
+ * 包名：   com.mmall.test
  * 创建者:  linzhou
- * 创建时间:17/10/09
- * 描述:  时间格式转化工具类
+ * 创建时间:17/10/17
+ * 描述: BigDecimal精度问题，test3为解决方法（采用string构造器）
  */
-public class DateTimeUtil {
+public class BigDecimalTest {
 
-    public static final  String STANDARD_FORMAT="yyyy-MM-dd HH:mm:ss";
-
-    public static Date strToDate(String dateTimeStr ){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(STANDARD_FORMAT);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
-
+    @Test
+    public void test1(){
+        System.out.println(0.05+0.01);
+        System.out.println(1.0-0.42);
+        System.out.println(4.015*100);
+        System.out.println(123.3/100);
     }
 
-    public static Date strToDate(String dateTimeStr , String formatStr){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(formatStr);
-        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
-        return dateTime.toDate();
-
+    @Test
+    public void test2(){
+        BigDecimal b1=new BigDecimal(0.05);
+        BigDecimal b2 = new BigDecimal(0.01);
+        System.out.println(b1.add(b2));
     }
 
-    public static String dateToStr(Date date){
-        if (date==null){
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(STANDARD_FORMAT);
+    @Test
+    public void test3(){
+        BigDecimal b1=new BigDecimal("0.05");
+        BigDecimal b2 = new BigDecimal("0.01");
+        System.out.println(b1.add(b2));
     }
-
-    public static String dateToStr(Date date , String formatStr){
-        if (date==null){
-            return StringUtils.EMPTY;
-        }
-        DateTime dateTime = new DateTime(date);
-        return dateTime.toString(formatStr);
-    }
-
-
-//    public static void main(String[] args) {
-//        System.out.println(DateTimeUtil.dateToStr(new Date()));
-//
-//        System.out.println(DateTimeUtil.strToDate("1994-10-29 23:29:09"));
-//
-//    }
 }
