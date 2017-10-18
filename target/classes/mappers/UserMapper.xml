@@ -197,7 +197,7 @@
         WHERE username = #{username}
     </update>
 
-    <select id="checkPassword" resultType="int" parameterType="map">
+    <select id="checkPassword" resultType="int" parameterType="int">
         SELECT COUNT(1)
         FROM mmall_user
         WHERE password=#{oldpassword}
