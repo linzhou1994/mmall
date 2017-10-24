@@ -78,6 +78,11 @@ public class MD5Util {
         return resultString.toUpperCase();
     }
 
+    /**
+     * MD5加密
+     * @param origin  需要加密的字符串
+     * @return
+     */
     public static String MD5EncodeUtf8(String origin) {
         return MD5Encode(origin, "utf-8");
     }

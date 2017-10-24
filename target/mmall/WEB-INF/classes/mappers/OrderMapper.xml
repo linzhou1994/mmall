@@ -172,12 +172,7 @@
       <if test="closeTime != null" >
         close_time = #{closeTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -198,4 +193,21 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByUserIdAndOrderNo" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List" />
+    from mmall_order
+    where user_id = #{userId} AND order_no = #{orderNo}
+  </select>
+
+  <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="long">
+    SELECT
+    <include refid="Base_Column_List" />
+    from mmall_order
+    WHERE order_no = #{orderNo}
+  </select>
+
+
+  
 </mapper>

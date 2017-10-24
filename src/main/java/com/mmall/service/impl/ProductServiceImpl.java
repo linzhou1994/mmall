@@ -268,6 +268,7 @@ public class ProductServiceImpl implements IProductService {
 
     /**
      * 获取商品列表
+     *
      * @param keyword      关键字
      * @param categoryId   分类id
      * @param pageNum      当前页
