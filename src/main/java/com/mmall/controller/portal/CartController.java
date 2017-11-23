@@ -68,8 +68,9 @@ public class CartController {
     @ResponseBody
     public ServerResponse<CartVo> list(HttpSession session){
         User user= (User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null)
+        if (user==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
 
         return mICartService.list(user.getId());
     }
