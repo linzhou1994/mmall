@@ -209,7 +209,7 @@ public class ProductManageController {
             String targetFilename = mFileServiceImpl.upload(file,path);
 
             //String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFilename;
-            String url = PropertiesUtil.getProperty("upload.url")+targetFilename;
+            String url = PropertiesUtil.getProperty("image.host")+targetFilename;
             Map fileMap = Maps.newHashMap();
             fileMap.put("uri",targetFilename);
             fileMap.put("url",url);

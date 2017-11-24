@@ -165,7 +165,8 @@ public class UserServiceImpl implements IUserService {
      * @param answer   用户的答案
      * @return
      */
-    public ServerResponse<String> checkAnswer(String username,String question,String answer){
+    @Override
+    public ServerResponse<String> checkAnswer(String username, String question, String answer){
         int resultCount = mUserMapper.checkAnswer(username,question,answer);
         if (resultCount>0){//问题答案回答正确
             String forgetToken = UUID.randomUUID().toString();
@@ -185,8 +186,9 @@ public class UserServiceImpl implements IUserService {
      * @param forgetoTken  系统标识
      * @return
      */
-    public ServerResponse<String> forgetRestPassword(String username,String newPassword,String forgetoTken){
-        if (StringUtils.isNotBlank(forgetoTken)){
+    @Override
+    public ServerResponse<String> forgetRestPassword(String username, String newPassword, String forgetoTken){
+        if (StringUtils.isBlank(forgetoTken)){
             return ServerResponse.createByErrorMessage("参数错误，需要传递token");
         }
         ServerResponse validResponse = checkValid(username,Const.USERNAME);
@@ -194,7 +196,7 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX+username);
-        if (StringUtils.isNotBlank(token)){
+        if (StringUtils.isBlank(token)){
             return ServerResponse.createByErrorMessage("token无效或者过期");
         }
         if (StringUtils.equals(token,forgetoTken)){
@@ -204,7 +206,7 @@ public class UserServiceImpl implements IUserService {
                 return ServerResponse.createBySuccessMessage("修改密码成功");
             }
         }else{
-            return ServerResponse.createByErrorMessage("token错去请重新获取");
+            return ServerResponse.createByErrorMessage("token错误请重新获取");
         }
         return ServerResponse.createByErrorMessage("密码修改失败");
     }

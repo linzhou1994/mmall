@@ -56,7 +56,7 @@ public class TokenCache {
                                                            .maximumSize(10000)
                                                            .expireAfterAccess(12, TimeUnit.HOURS)
                                                            .build(new CacheLoader<String, String>() {
-                                                                //挡key没有对应的值的时候调用
+                                                                //当key没有对应的值的时候调用
                                                                 @Override
                                                                 public String load(String s) throws Exception {
                                                                    return "null";

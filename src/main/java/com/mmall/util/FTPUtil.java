@@ -80,7 +80,7 @@ public class FTPUtil {
                 ftpClient.changeWorkingDirectory(remotePath);
                 ftpClient.setBufferSize(1024);
                 ftpClient.setControlEncoding("UTF-8");
-                ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);
+                ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
                 ftpClient.enterLocalPassiveMode();
                 for (File fileItem : fileList) {
                     fis = new FileInputStream(fileItem);
@@ -104,9 +104,9 @@ public class FTPUtil {
         ftpClient = new FTPClient();
         try {
             ftpClient.connect(ip);
-            isSuccess = true;
+            isSuccess = ftpClient.login(user,pwd);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("连接FTP服务器异常",e);
         }
         return isSuccess;
     }
